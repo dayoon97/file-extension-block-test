@@ -1,5 +1,6 @@
 package com.flow.project.file.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -33,6 +34,11 @@ public class FileDaoImpl implements FileDao{
 		int result = sqlSession.selectOne("File.duplicateCheck", fileExtensionName);
 		
 		return result;
+	}
+
+	@Override
+	public List<File> selectCheckedFile(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("File.selectCheckedFile");
 	}
 	
 }

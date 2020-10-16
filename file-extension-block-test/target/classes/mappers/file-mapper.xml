@@ -39,4 +39,11 @@
 		 WHERE FILE_EXTENSION_NAME = #{fileExtensionName}
 	</select>
 	
+	<select id="selectCheckedFile" resultMap="FileResultSet">
+		SELECT FILE_EXTENSION_NAME
+		  FROM FILE_EXTENSION_LIST
+		 WHERE FILE_EXTENSION_YN = 'Y'
+		   AND FILE_EXTENSION_TYPE = '고정'
+	</select>
+	
 </mapper>

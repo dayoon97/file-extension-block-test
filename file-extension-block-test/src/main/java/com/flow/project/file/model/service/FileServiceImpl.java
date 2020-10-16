@@ -1,5 +1,6 @@
 package com.flow.project.file.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -36,6 +37,11 @@ public class FileServiceImpl implements FileService{
 	@Override
 	public int duplicateCheckFileExtension(String fileExtensionName) {
 		return fd.duplicateCheckFileExtension(sqlSession, fileExtensionName);
+	}
+
+	@Override
+	public List<File> selectCheckedFile() {
+		return fd.selectCheckedFile(sqlSession);
 	}
 
 	

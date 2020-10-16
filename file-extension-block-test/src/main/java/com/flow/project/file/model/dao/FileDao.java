@@ -1,5 +1,6 @@
 package com.flow.project.file.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,5 +16,7 @@ public interface FileDao {
 	int deleteFileExtension(SqlSessionTemplate sqlSession, File file);
 
 	int duplicateCheckFileExtension(SqlSessionTemplate sqlSession, String fileExtensionName);
+
+	List<File> selectCheckedFile(SqlSessionTemplate sqlSession);
 
 }

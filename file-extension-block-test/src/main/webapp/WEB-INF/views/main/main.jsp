@@ -11,14 +11,14 @@
 <body>
 	 <table>	
 		<tr>
-			<th>고정 확장자</th>
-			<th><input type="checkbox" class="fix" id="bat">bat</th>
-			<th><input type="checkbox" class="fix" id="cmd">cmd</th>
-			<th><input type="checkbox" class="fix" id="com">com</th>
-			<th><input type="checkbox" class="fix" id="cpl">cpl</th>
-			<th><input type="checkbox" class="fix" id="exe">exe</th>
-			<th><input type="checkbox" class="fix" id="scr">scr</th>
-			<th><input type="checkbox" class="fix" id="js">js</th>
+			<td>고정 확장자</td>
+			<td><input type="checkbox" class="fix" id="bat">bat</td>
+			<td><input type="checkbox" class="fix" id="cmd">cmd</td>
+			<td><input type="checkbox" class="fix" id="com">com</td>
+			<td><input type="checkbox" class="fix" id="cpl">cpl</td>
+			<td><input type="checkbox" class="fix" id="exe">exe</td>
+			<td><input type="checkbox" class="fix" id="scr">scr</td>
+			<td><input type="checkbox" class="fix" id="js">js</td>
 		</tr>
 		<tr>
 			<td>커스텀 확장자</td>
@@ -39,26 +39,69 @@
 	</table>
 </body>
 <script>
+	var typeArr = [];
+
+	//새로고침 후 체크박스 유지
+	window.onload = function(){
+		$.ajax({
+			url: "selectCheckFile.fi",
+			type: "post",
+			dataType: "json",
+			success : function(data){
+				var typeNameArr = [];
+				var dataList = data.CheckedList;
+				
+				var selectFileExt = $.each(dataList, function(index, value){
+					typeNameArr.push(value.fileExtensionName);
+				});
+				
+				for(var i = 0; i < typeNameArr.length; i++){
+					$("#"+typeNameArr[i]).attr('checked', true);
+				}
+				
+				for(var i = 0; i < arr.length; i++){
+					$("#"+arr[i]).attr('checked', true);
+				}
+			}
+		});
+		var output = localStorage.getItem("typeArr");
+		
+		var arr = JSON.parse(output);
+		console.log(arr);
+		
+		for(var i = 0; i < arr.length; i++){
+			$("#"+arr[i]).attr('checked', true);
+		}
+		
+	}
+
 	//고정확장자 체크 여부 확인
 	$(document).on('change', '.fix', function(event){
 		
 		var typeElement = event.target;			//체크박스를 체크하면 Element를 변수에 담는다.
 		var typeId = typeElement.id;			//체크한 Element의 Id를 변수에 담는다.
 		
-		var ControllerUrl = "";				    //url 초기화
 		var checkYN = "";
 		
-		if($("#"+typeId).is(":checked")){		//체크 여부에 따라 url 설정
+		if($("#"+typeId).is(":checked")){		
 			checkYN = "Y";
 			updateFileCheck(typeId, checkYN);
-			console.log(checkYN);
-			console.log(typeId);
+			
+			typeArr.push(typeId);
+			localStorage.setItem("typeArr", JSON.stringify(typeArr));
 		} else {
 			checkYN = "N";
 			updateFileCheck(typeId, checkYN);
-			console.log(checkYN);
-			console.log(typeId);
+			
+			for(var i = 0; i < typeArr.length; i++){
+				if (typeId == typeArr[i]){
+					typeArr.splice(i, 1);
+				}
+			}
+			localStorage.setItem("typeArr", JSON.stringify(typeArr));
 		}
+		
+	
 	
 	//체크박스 Y/N변경	
 	function updateFileCheck(typeId, checkYN){
@@ -190,6 +233,5 @@
 			}
 		});
 	};
-	
 </script>
 </html>

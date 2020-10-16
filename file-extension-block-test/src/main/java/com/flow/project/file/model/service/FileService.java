@@ -1,5 +1,6 @@
 package com.flow.project.file.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.flow.project.file.model.vo.File;
@@ -13,5 +14,7 @@ public interface FileService {
 	int deleteFileExtension(File file);
 
 	int duplicateCheckFileExtension(String fileExtensionName);
+
+	List<File> selectCheckedFile();
 
 }
