@@ -18,9 +18,9 @@
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		<property name="username" value="FLOW"/>
-		<property name="password" value="FLOW"/>
+		<property name="url" value="jdbc:oracle:thin:@flowtestserver.cwm08q6cnxki.ap-northeast-2.rds.amazonaws.com:1521:ORCL"/>
+		<property name="username" value="admin"/>
+		<property name="password" value="flowtest55"/>
 		<property name="defaultAutoCommit" value="false"/>
 	</bean>
 	
