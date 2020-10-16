@@ -1,0 +1,69 @@
+#content{
+	width: 500px;
+	height: 500px;
+	display: inline-block;
+	margin-left:700px;
+}
+#content-left-area{
+	width: 20%;
+	height: 100%;
+	display: inline-block;
+	float: left;
+}
+#content-right-area{
+	width: 80%;
+	height: 100%;
+	display: inline-block;
+}
+#context-lefe-cont-title{
+	width: 80%;
+	height: 100%;
+	display: inline-block;	
+}
+input{
+	border-radius: 5px;
+	border: 1px solid gray;
+}
+.extBtn{
+	width: 50px;
+	height: 20px;
+	border-radius: 5px;
+	border: 1px solid gray;
+	display: inline-block;
+	margin-left: 5px;
+	margin-right: 3px;
+	margin-bottom: 3px;
+	font-size: 12px;
+	padding-left: 6px;
+	text-align: center;
+	padding-top:3px;
+}
+#addTextarea{
+	width: 350px;
+	height: 250px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	display: inline-block;
+}
+#count-area{
+	width: 50px;
+	height: 20px;
+	font-size: 12px;
+}
+#fileExt-area{
+	width: 100%;
+	height: 90%;
+	display: inline-block;
+}
+#count-area{
+	display: inline-block;
+	margin-left: 3px;
+}
+.delete-ext-area{
+	margin-right: 7px;
+	float: right;
+	display: inline-block;
+	font-weight: bold;
+	font-size: 14px;
+	cursor: pointer;
+}

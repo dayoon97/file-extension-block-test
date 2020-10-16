@@ -1,1 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="File">
+	<resultMap type="com.flow.project.file.model.vo.File" id="FileResultSet">
+		<id property="fileExtensionCode" column="FILE_EXTENSION_CODE"/>
+		<result property="fileExtensionName" column="FILE_EXTENSION_NAME"/>
+		<result property="fileExtensionYN" column="FILE_EXTENSION_YN"/>
+		<result property="fileExtensionType" column="FILE_EXTENSION_TYPE"/>
+	</resultMap>
+	
+	<update id="updateFileExtension" parameterType="File">
+		UPDATE FILE_EXTENSION_LIST
+		<if test='fileExtensionYN == "Y"'>
+		SET FILE_EXTENSION_YN = 'Y'
+		</if>
+		<if test='fileExtensionYN == "N"'>
+		SET FILE_EXTENSION_YN = 'N'
+		</if>
+		WHERE FILE_EXTENSION_NAME = #{fileExtensionName, jdbcType=VARCHAR}
+	</update>
+	
+	<insert id="insertFileExtension" parameterType="File">
+		INSERT INTO FILE_EXTENSION_LIST
+		VALUES(SEQ_FILE_EXTENSION_LIST.NEXTVAL, #{fileExtensionName}, 'Y', #{fileExtensionType})
+	</insert>
+	
+	<delete id="deleteFileExtension" parameterType="File">
+		DELETE FROM FILE_EXTENSION_LIST
+		WHERE FILE_EXTENSION_NAME = #{fileExtensionName}
+	</delete>
+	
+	<select id="duplicateCheck" resultType="File">
+		SELECT COUNT(*)
+		  FROM FILE_EXTENSION_LIST
+		 WHERE FILE_EXTENSION_NAME = #{fileExtensionName}
+	</select>
+	
+</mapper>
