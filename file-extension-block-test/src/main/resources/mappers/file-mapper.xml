@@ -29,10 +29,11 @@
 	
 	<delete id="deleteFileExtension" parameterType="File">
 		DELETE FROM FILE_EXTENSION_LIST
-		WHERE FILE_EXTENSION_NAME = #{fileExtensionName}
+		 WHERE FILE_EXTENSION_NAME = #{fileExtensionName}
+		   AND FILE_EXTENSION_TYPE = '커스텀'
 	</delete>
 	
-	<select id="duplicateCheck" resultType="File">
+	<select id="duplicateCheck" resultType="int" parameterType="File">
 		SELECT COUNT(*)
 		  FROM FILE_EXTENSION_LIST
 		 WHERE FILE_EXTENSION_NAME = #{fileExtensionName}

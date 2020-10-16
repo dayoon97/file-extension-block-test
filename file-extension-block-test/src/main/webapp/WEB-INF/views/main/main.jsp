@@ -72,17 +72,20 @@
 	    
 	});
 	
-	//커스텀 확장자 추가 함수
+	//커스텀 확장자 개수 변수
 	var count = 0;
+	
+	//커스텀 확장자 이름 변수
+	var addFileExtName = "";
+	
+	//커스텀 확장자 추가 함수
 	$(document).on('click', '#addBtn', function(){
 		if($("#addFileExtName").val().length >= 20){
 			alert("20자 이상 입력할 수 없습니다.");
 			
 			clearInput();
 		} else {
-			var addFileExtName = $("#addFileExtName").val();
-			
-			var FileExtType = '커스텀';
+			addFileExtName = $("#addFileExtName").val();
 			
 			clearInput();
 			
@@ -92,7 +95,7 @@
 				if(count >= '200'){
 					alert("더이상 입력할 수 없습니다.");
 				} else {
-					duplicateCheck(addFileExtName, FileExtType);
+					duplicateCheck(addFileExtName);
 				}
 			}
 		}
@@ -100,39 +103,56 @@
 	});
 	
 	//중복 체크 함수
-	function duplicateCheck(addFileExtName, FileExtType){
+	function duplicateCheck(addFileExtName){
 		$.ajax({
 			url: "duplicateCheck.fi",
 			type: "post",
 			data: {"fileExtensionName" : addFileExtName},
 			dataType: "json",
 			success : function(data){
-				if(data > 0){
+				if(data >= 1){
 					alert("이미 존재하는 확장자입니다.");
-				} else {
-					addFileExt(addFileExtName, FileExtType);
+				} else if(data == 0) {
+					addFileExt(addFileExtName);
 				}
 			}
 		});
 	}
 	
-	//추가 함수
-	function addFileExt(addFileExtName, FileExtType){
-		$.ajax({
-			url: "insertFileExt.fi",
-			type: "post",
-			data: {"fileExtensionName" : addFileExtName, "fileExtensionType" : FileExtType},
-			dataType: "json",
-			success : function(data){
-				if(data > 0){
-					count++;
-					$("#count-cont-area").remove();
-					$("#count-area").append("<div id='count-cont-area'>" + count + "/200</div>");
-					$("#fileExt-area").append("<div class='extBtn'>" + addFileExtName + "<div class='delete-ext-area'>X</div></div>");
+	//확장자 추가 함수
+	function addFileExt(addFileExtName){
+		var fileExtType = '커스텀';
+		
+		switch(addFileExtName){
+			case 'bat' : fixFileExt(); break;
+			case 'cmd' : fixFileExt(); break;
+			case 'com' : fixFileExt(); break;
+			case 'cpl' : fixFileExt(); break;
+			case 'exe' : fixFileExt(); break;
+			case 'scr' : fixFileExt(); break;
+			case 'js' : fixFileExt(); break;
+			default : 
+			$.ajax({
+				url: "insertFileExt.fi",
+				type: "post",
+				data: {"fileExtensionName" : addFileExtName, "fileExtensionType" : fileExtType},
+				dataType: "json",
+				success : function(data){
+					if(data > 0){
+						count++;
+						$("#count-cont-area").remove();
+						$("#count-area").append("<div id='count-cont-area'>" + count + "/200</div>");
+						$("#fileExt-area").append("<div class='extBtn'>" + addFileExtName + "<div class='delete-ext-area'>X</div></div>");
+					}
 				}
-			}
-		});
+			});
+		}
 	};
+	
+	function fixFileExt(){
+		alert("고정 확장자는 입력이 불가능합니다.");
+	}
+	
 	
 	//input text값 초기화
 	function clearInput(){
@@ -170,10 +190,6 @@
 			}
 		});
 	};
-	
-	
-	
-	
 	
 </script>
 </html>

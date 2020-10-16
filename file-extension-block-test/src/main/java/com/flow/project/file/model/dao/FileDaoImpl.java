@@ -29,8 +29,9 @@ public class FileDaoImpl implements FileDao{
 	}
 
 	@Override
-	public int duplicateCheckFileExtension(SqlSessionTemplate sqlSession, File file) {
-		int result = sqlSession.selectOne("File.duplicateCheck", file);
+	public int duplicateCheckFileExtension(SqlSessionTemplate sqlSession, String fileExtensionName) {
+		int result = sqlSession.selectOne("File.duplicateCheck", fileExtensionName);
+		
 		return result;
 	}
 	

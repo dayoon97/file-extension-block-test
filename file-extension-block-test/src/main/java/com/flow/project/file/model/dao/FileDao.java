@@ -14,6 +14,6 @@ public interface FileDao {
 
 	int deleteFileExtension(SqlSessionTemplate sqlSession, File file);
 
-	int duplicateCheckFileExtension(SqlSessionTemplate sqlSession, File file);
+	int duplicateCheckFileExtension(SqlSessionTemplate sqlSession, String fileExtensionName);
 
 }

@@ -34,9 +34,9 @@ public class FileServiceImpl implements FileService{
 	}
 
 	@Override
-	public int duplicateCheckFileExtension(File file) {
-		return fd.duplicateCheckFileExtension(sqlSession, file);
+	public int duplicateCheckFileExtension(String fileExtensionName) {
+		return fd.duplicateCheckFileExtension(sqlSession, fileExtensionName);
 	}
-	
+
 	
 }

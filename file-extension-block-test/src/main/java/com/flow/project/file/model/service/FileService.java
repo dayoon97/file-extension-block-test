@@ -12,6 +12,6 @@ public interface FileService {
 
 	int deleteFileExtension(File file);
 
-	int duplicateCheckFileExtension(File file);
+	int duplicateCheckFileExtension(String fileExtensionName);
 
 }
